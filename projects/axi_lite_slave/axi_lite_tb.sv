@@ -8,8 +8,15 @@ module axi_lite_tb;
   initial begin
     intf.awvalid=0; intf.wvalid=0; intf.bready=1; intf.arvalid=0; intf.rready=1;
     repeat(2) @(posedge aclk); aresetn=1;
-    intf.awaddr=32'h0; intf.wdata=32'h1234_5678; intf.awvalid=1; intf.wvalid=1; @(posedge aclk); intf.awvalid=0; intf.wvalid=0;
-    intf.araddr=32'h0; intf.arvalid=1; @(posedge aclk); intf.arvalid=0;
+
+    intf.awaddr=32'h0; intf.wdata=32'h1234_5678; intf.awvalid=1; intf.wvalid=1;
+    do @(posedge aclk); while(!(intf.awvalid && intf.awready && intf.wvalid && intf.wready));
+    intf.awvalid=0; intf.wvalid=0;
+
+    intf.araddr=32'h0; intf.arvalid=1;
+    do @(posedge aclk); while(!(intf.arvalid && intf.arready));
+    intf.arvalid=0;
+
     repeat(3) @(posedge aclk); $finish;
   end
 endmodule

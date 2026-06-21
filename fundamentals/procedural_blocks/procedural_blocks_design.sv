@@ -7,7 +7,4 @@ module procedural_blocks_design(proc_if intf);
     if(!intf.rst_n) intf.y <= '0;
     else if(intf.en) intf.y <= sum;
   end
-  initial begin
-    // initial block for simulation-only power-up note
-  end
 endmodule
