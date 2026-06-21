@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+simv*
+csrc/
+*.log
+transcript
+work/
+xsim.dir/
+*.jou
+*.pb
